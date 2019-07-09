@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ComposeViewController : UIViewController
+
+@property (strong, nonatomic)UIImage *passedImage;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImage;
+@property (weak, nonatomic) IBOutlet UITextView *captionField;
+- (IBAction)didTapShare:(id)sender;
 
 @end
 

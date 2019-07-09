@@ -7,6 +7,7 @@
 //
 
 #import "ComposeViewController.h"
+#import "Post.h"
 
 @interface ComposeViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.photoImage.image = self.passedImage;
 }
 
 /*
@@ -28,5 +30,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)didTapShare:(id)sender {
+    [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

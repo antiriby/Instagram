@@ -6,12 +6,14 @@
 //  Copyright © 2019 antiriby. All rights reserved.
 //
 
+#import "ComposeViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "TimelineViewController.h"
 #import "Parse/Parse.h"
+#import "PostCell.h"
 
-@interface TimelineViewController () </*UITableViewDelegate, UITableViewDataSource,*/UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -24,25 +26,28 @@
     //self.tableView.delegate = self;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+//#pragma mark - Navigation
+
+ //In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+     //Get the new view controller using [segue destinationViewController].
+     //Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    composeController.passedImage = self.photoImage;
 }
-*/
 
 
-//- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
-//    return cell;
-//}
-//
-//- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 20;
-//}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
 
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
@@ -59,18 +64,6 @@
     }];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
-    // Do something with the images (based on your use case)
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)didTapCamera:(id)sender {
     //Instantiate UIImagePickerController
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
@@ -85,7 +78,21 @@
     }
     
     [self presentViewController:imagePickerVC animated:YES completion:nil];
-    [self imagePickerController:imagePickerVC didFinishPickingMediaWithInfo:<#(nonnull NSDictionary<UIImagePickerControllerInfoKey,id> *)#>]
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    
+    // Do something with the images (based on your use case)
+    self.photoImage = editedImage;
+
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+     [self performSegueWithIdentifier:@"toPost" sender:self];
 }
 
 @end
