@@ -10,14 +10,16 @@
 		<dict>
 			<key>antiriby-instagram.herokuapp.com</key>
 			<dict>
+				<key>NSIncludesSubDomains</key>
+				<true/>
 				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
 				<false/>
-				<key>NSIncludesSubDomains</key>
-				<true/>
 			</dict>
 		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>

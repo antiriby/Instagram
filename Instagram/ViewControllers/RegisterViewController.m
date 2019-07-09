@@ -21,7 +21,7 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)registerUser {
+- (IBAction)registerUser:(id)sender {
     // initialize a user object
     PFUser *newUser = [PFUser user];
     
@@ -36,18 +36,15 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             NSLog(@"User registered successfully");
-    
             // manually segue to logged in view
-            [self prepareForSegue:(UIStoryboardSegue *)@"toFeed" sender:self];
+            [self performSegueWithIdentifier:@"toFeed" sender:self];
         }
     }];
 }
 
+
 - (IBAction)cancelRegistration:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-- (IBAction)completeRegistration:(id)sender {
 }
 
 /*

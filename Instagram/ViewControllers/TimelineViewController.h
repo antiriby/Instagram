@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TimelineViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)didTapLogout:(id)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

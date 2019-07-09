@@ -17,10 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
-- (void)registerUser;
+- (IBAction)registerUser:(id)sender;
 - (IBAction)cancelRegistration:(id)sender;
-- (IBAction)completeRegistration:(id)sender;
-
 @end
 
 NS_ASSUME_NONNULL_END
