@@ -226,14 +226,36 @@
                                 <action selector="didTapLogout:" destination="O9Q-6i-HL5" id="3YA-kb-1cu"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="insta_camera_btn" id="ojy-8E-2I6">
+                            <connections>
+                                <action selector="didTapCamera:" destination="O9Q-6i-HL5" id="Azk-Pp-4se"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="SIx-gK-amp" id="F6c-Xz-MA0"/>
+                        <segue destination="Pb2-BA-zDx" kind="show" identifier="toCamera" id="fFZ-GF-IaR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jru-83-HjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3210" y="430"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="qCz-ra-0ej">
+            <objects>
+                <viewController id="V2n-al-Bq7" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="70E-GC-gSJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="6c0-mH-Uo0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LCP-cl-C3V"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kph-gd-p8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5305" y="430"/>
         </scene>
         <!--Item-->
         <scene sceneID="eIF-0f-beq">
@@ -254,10 +276,29 @@
             </objects>
             <point key="canvasLocation" x="2258" y="430"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wAr-TM-4Ej">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pb2-BA-zDx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4O7-xv-QPc">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="V2n-al-Bq7" kind="relationship" relationship="rootViewController" id="QL7-x9-WOk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nYS-Do-Srs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4278" y="430"/>
+        </scene>
     </scenes>
     <resources>
         <image name="image_placeholder" width="375" height="375"/>
         <image name="insta logo-1" width="225" height="225"/>
+        <image name="insta_camera_btn" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Qtj-6f-8kk"/>

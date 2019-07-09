@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)didTapLogout:(id)sender;
+- (IBAction)didTapCamera:(id)sender;
 
 @end
 
