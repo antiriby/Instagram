@@ -13,7 +13,8 @@
 #import "Parse/Parse.h"
 #import "PostCell.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,
+  UINavigationControllerDelegate>
 
 @end
 
@@ -26,7 +27,6 @@
     self.tableView.delegate = self;
     [self fetchPosts];
 }
-
 
 //#pragma mark - Navigation
 
@@ -80,7 +80,6 @@
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
-        
         if(error){
             NSLog(@"Error: %@", error.description);
         } else {
@@ -113,7 +112,6 @@
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
     
     // Do something with the images (based on your use case)
     self.photoImage = editedImage;

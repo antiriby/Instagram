@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIImage *photoImage;
 @property (strong, nonatomic) NSArray *posts;
+
 - (IBAction)didTapLogout:(id)sender;
 - (IBAction)didTapCamera:(id)sender;
 
