@@ -45,7 +45,7 @@
     if (!imageData) {
         return nil;
     }
-    return [PFFileObject fileObjectWithData:imageData];
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
 @end
