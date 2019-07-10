@@ -22,8 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.tableView.dataSource = self;
-    //self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self fetchPosts];
 }
 
 
@@ -38,15 +39,42 @@
     composeController.passedImage = self.photoImage;
 }
 
-
+-(void)fetchPosts{
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+    
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+            NSLog(@"Successfully pulled posts!");
+            self.posts = posts;
+            [self.tableView reloadData];
+        }
+        else {
+            // handle error
+            NSLog(@"Error: %@", error.description);
+        }
+    }];
+}
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    
+    Post *post = self.posts[indexPath.row];
+    cell.post = post;
+    cell.userName.text = post[@"userID"];
+    cell.caption.text = post.caption;
+    [cell.postImage setImage:(UIImage *)post.image];
+    
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.posts.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {
