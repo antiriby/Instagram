@@ -18,12 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="instagramlogo" translatesAutoresizingMaskIntoConstraints="NO" id="7qd-sE-eyV">
-                                <rect key="frame" x="50" y="177" width="292" height="204"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagramlogo" translatesAutoresizingMaskIntoConstraints="NO" id="7qd-sE-eyV">
+                                <rect key="frame" x="41.5" y="205" width="292" height="204"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="292" id="b0u-XE-Nf5"/>
+                                    <constraint firstAttribute="height" constant="204" id="rIZ-JG-etE"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7qd-sE-eyV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="185" id="9WF-jk-9fE"/>
+                            <constraint firstItem="7qd-sE-eyV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="41.5" id="IvE-b4-bzC"/>
+                            <constraint firstItem="7qd-sE-eyV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hqV-oo-E97"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

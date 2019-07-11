@@ -38,7 +38,9 @@
 
 -(void)setPost:(Post *)post{
     _post = post;
-    self.userNameLabel.text = self.post[@"author"][@"username"];
+    
+    self.topUsernameLabel.text = self.post[@"author"][@"username"];
+    self.bottomUsernameLabel.text = self.post[@"author"][@"username"];
     self.captionLabel.text = self.post[@"caption"];
     NSDate *createdAtDate= self.post.createdAt;
     // Convert Date to String

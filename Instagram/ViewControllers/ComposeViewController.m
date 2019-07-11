@@ -31,18 +31,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)dismissKeyboard:(id)sender {
+    [self.view endEditing:YES];
+}
 
 - (IBAction)didTapShare:(id)sender {
     
-    [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
-    self.tabBarController.selectedViewController
-    = [self.tabBarController.viewControllers objectAtIndex:0];
-    
+    Post *newPost = [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
+    [self.delegate didPost:newPost];
+    UIViewController *homeFeedController =[self.tabBarController.viewControllers objectAtIndex:0];
+    [self.tabBarController setSelectedViewController:homeFeedController];
 }
 
 - (IBAction)didTapImageView:(id)sender {
     
-    NSLog(@"Transitioning to gallery!");
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -54,7 +56,6 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 

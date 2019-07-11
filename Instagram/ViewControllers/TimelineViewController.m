@@ -15,7 +15,7 @@
 #import "PostCell.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,
-  UINavigationControllerDelegate, UIScrollViewDelegate>
+  UINavigationControllerDelegate, UIScrollViewDelegate, UITabBarDelegate, ComposeViewControllerDelegate>
 
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic)UIRefreshControl *refreshControl;
@@ -33,6 +33,10 @@
     //Set tableview datasource and delegate
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tabBarController.delegate = self;
+    
+    ComposeViewController *composeController = [self.tabBarController.viewControllers objectAtIndex:1];
+    composeController.delegate = self;
     
     //Refresh Indicatior
     self.refreshControl  = [[UIRefreshControl alloc]init];
@@ -58,10 +62,6 @@
         DetailsViewController *detailsController = [segue destinationViewController];
         detailsController.post = post;
     }
-    else if ([segue.identifier isEqualToString:@"toPost"]){
-        ComposeViewController *composeController = [segue destinationViewController];
-        composeController.passedImage = self.photoImage;
-    }
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -83,7 +83,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    postQuery.limit = 20;
+    //postQuery.limit = 20;
     
     // fetch data asynchronously
     //This is so the app does not stall while you are fetching the data from Parse
@@ -119,7 +119,8 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    postQuery.limit = 20;
+    //Look up Querey Skip
+    //postQuery.limit = 25;
     
     // fetch data asynchronously
     //This is so the app does not stall while you are fetching the data from Parse
@@ -155,9 +156,8 @@
 }
 
 - (void)didPost:(Post *)post{
-    //[self.posts addObject:post];
+    [self.posts addObject:post];
     [self fetchPosts];
-    [self.tableView reloadData];
 }
 
 @end
