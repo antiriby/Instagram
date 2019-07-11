@@ -37,7 +37,7 @@
 
 -(void)setPost:(Post *)post{
     _post = post;
-    self.userNameLabel.text = [NSString stringWithFormat:@"Post made by: %@", self.post[@"author"][@"username"]];
+    self.userNameLabel.text = self.post[@"author"][@"username"];
     self.captionLabel.text = self.post[@"caption"];
     
     PFFileObject *img = post.image;
