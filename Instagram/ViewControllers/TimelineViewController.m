@@ -14,8 +14,8 @@
 #import "Parse/Parse.h"
 #import "PostCell.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,
-  UINavigationControllerDelegate, UIScrollViewDelegate, UITabBarDelegate, ComposeViewControllerDelegate>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource,
+  UINavigationControllerDelegate, UIScrollViewDelegate>
 
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic)UIRefreshControl *refreshControl;
@@ -33,10 +33,6 @@
     //Set tableview datasource and delegate
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tabBarController.delegate = self;
-    
-    ComposeViewController *composeController = [self.tabBarController.viewControllers objectAtIndex:1];
-    composeController.delegate = self;
     
     //Refresh Indicatior
     self.refreshControl  = [[UIRefreshControl alloc]init];
@@ -119,8 +115,8 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    //Look up Querey Skip
-    //postQuery.limit = 25;
+    postQuery.skip = [self.posts count];
+    postQuery.limit = 20;
     
     // fetch data asynchronously
     //This is so the app does not stall while you are fetching the data from Parse
@@ -128,7 +124,7 @@
         if (posts) {
             // do something with the data fetched
             NSLog(@"Successfully pulled posts!");
-            self.posts = (NSMutableArray *)posts;
+            [self.posts addObjectsFromArray:posts];
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
             
@@ -153,11 +149,6 @@
             [self loadMoreData];
         }
     }
-}
-
-- (void)didPost:(Post *)post{
-    [self.posts addObject:post];
-    [self fetchPosts];
 }
 
 @end

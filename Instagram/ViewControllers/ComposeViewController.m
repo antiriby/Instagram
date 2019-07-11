@@ -38,7 +38,6 @@
 - (IBAction)didTapShare:(id)sender {
     
     Post *newPost = [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
-    [self.delegate didPost:newPost];
     UIViewController *homeFeedController =[self.tabBarController.viewControllers objectAtIndex:0];
     [self.tabBarController setSelectedViewController:homeFeedController];
 }
