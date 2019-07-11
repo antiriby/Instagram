@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.usernameLabel.text = self.post[@"author"][@"username"];
+    self.usernameLabel.text = [NSString stringWithFormat:@"User: %@",self.post[@"author"][@"username"]];
     self.captionLabel.text = self.post[@"caption"];
     
     NSDate *createdAtDate= self.post.createdAt;

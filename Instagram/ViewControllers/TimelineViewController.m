@@ -15,7 +15,9 @@
 #import "PostCell.h"
 
 @interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,
-  UINavigationControllerDelegate>
+  UINavigationControllerDelegate, UIScrollViewDelegate>
+
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic)UIRefreshControl *refreshControl;
 
 @end
@@ -76,22 +78,6 @@
     }];
 }
 
-- (IBAction)didTapCamera:(id)sender {
-    //Instantiate UIImagePickerController
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
-}
-
 -(void)fetchPosts{
     // construct PFQuery
     PFQuery *postQuery = [Post query];
@@ -129,28 +115,49 @@
     return self.posts.count;
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+-(void)loadMoreData{
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
     
-    // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
-    // Do something with the images (based on your use case)
-    self.photoImage = editedImage;
-
-    // Dismiss UIImagePickerController to go back to your original view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-//    ComposeViewController *nextComposeController = [[ComposeViewController alloc] init];
-//    [self.navigationController pushViewController:nextComposeController animated:YES];
-    [self performSegueWithIdentifier:@"toPost" sender:self];
-    [self fetchPosts];
+    // fetch data asynchronously
+    //This is so the app does not stall while you are fetching the data from Parse
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            // do something with the data fetched
+            NSLog(@"Successfully pulled posts!");
+            self.posts = (NSMutableArray *)posts;
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+            
+            self.isMoreDataLoading = false;
+        }
+        else {
+            // handle error
+            NSLog(@"Error: %@", error.description);
+        }
+    }];
 }
 
-//- (void)didPost:(Post *)post{
-//    [self.posts addObject:post];
-//    [self fetchPosts];
-//    [self.tableView reloadData];
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = true;
+            [self loadMoreData];
+        }
+    }
+}
+
+- (void)didPost:(Post *)post{
+    //[self.posts addObject:post];
+    [self fetchPosts];
+    [self.tableView reloadData];
+}
 
 @end

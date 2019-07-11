@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSMutableArray *posts;
 
 - (IBAction)didTapLogout:(id)sender;
-- (IBAction)didTapCamera:(id)sender;
 
 @end
 

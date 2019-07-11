@@ -18,7 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.photoImage.image = self.passedImage;
+    //self.photoImage.image = self.passedImage;
+    [self didTapImageView:self];
 }
 
 /*
@@ -32,8 +33,11 @@
 */
 
 - (IBAction)didTapShare:(id)sender {
+    
     [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    self.tabBarController.selectedViewController
+    = [self.tabBarController.viewControllers objectAtIndex:0];
+    
 }
 
 - (IBAction)didTapImageView:(id)sender {

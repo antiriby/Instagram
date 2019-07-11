@@ -8,6 +8,7 @@
 
 #import "PostCell.h"
 #import "Post.h"
+#import "DateTools.h"
 
 @implementation PostCell
 
@@ -39,6 +40,9 @@
     _post = post;
     self.userNameLabel.text = self.post[@"author"][@"username"];
     self.captionLabel.text = self.post[@"caption"];
+    NSDate *createdAtDate= self.post.createdAt;
+    // Convert Date to String
+    self.timestampLabel.text = [createdAtDate timeAgoSinceNow];
     
     PFFileObject *img = post.image;
     [img getDataInBackgroundWithBlock:^(NSData *  imageData, NSError * error) {
