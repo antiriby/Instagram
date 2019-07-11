@@ -42,6 +42,9 @@
     }];
 }
 
+- (IBAction)dismissKeyboard:(id)sender {
+    [self.view endEditing:YES];
+}
 
 - (IBAction)cancelRegistration:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];

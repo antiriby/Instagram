@@ -47,7 +47,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
      //Get the new view controller using [segue destinationViewController].
      //Pass the selected object to the new view controller.
-    UINavigationController *navigationController = [segue destinationViewController];
     if([segue.identifier isEqualToString:@"toDetails"]){
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
@@ -58,7 +57,7 @@
         detailsController.post = post;
     }
     else if ([segue.identifier isEqualToString:@"toPost"]){
-        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        ComposeViewController *composeController = [segue destinationViewController];
         composeController.passedImage = self.photoImage;
     }
 }

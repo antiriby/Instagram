@@ -14,7 +14,6 @@
 		681A2C0522D55E5200BC63E4 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 681A2C0422D55E5200BC63E4 /* PostCell.m */; };
 		681A2C4F22D6A63D00BC63E4 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681A2C4E22D6A63D00BC63E4 /* DetailsViewController.m */; };
 		68313E7522D3FBE00093236A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68313E7422D3FBE00093236A /* AppDelegate.m */; };
-		68313E7822D3FBE00093236A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68313E7722D3FBE00093236A /* ViewController.m */; };
 		68313E7B22D3FBE00093236A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68313E7922D3FBE00093236A /* Main.storyboard */; };
 		68313E7D22D3FBE10093236A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68313E7C22D3FBE10093236A /* Assets.xcassets */; };
 		68313E8022D3FBE10093236A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68313E7E22D3FBE10093236A /* LaunchScreen.storyboard */; };
@@ -60,8 +59,6 @@
 		68313E7022D3FBE00093236A /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68313E7322D3FBE00093236A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68313E7422D3FBE00093236A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		68313E7622D3FBE00093236A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		68313E7722D3FBE00093236A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		68313E7A22D3FBE00093236A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68313E7C22D3FBE10093236A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68313E7F22D3FBE10093236A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -144,8 +141,6 @@
 				68313EA522D409210093236A /* ViewControllers */,
 				68313E7322D3FBE00093236A /* AppDelegate.h */,
 				68313E7422D3FBE00093236A /* AppDelegate.m */,
-				68313E7622D3FBE00093236A /* ViewController.h */,
-				68313E7722D3FBE00093236A /* ViewController.m */,
 				68313E7922D3FBE00093236A /* Main.storyboard */,
 				68313E7C22D3FBE10093236A /* Assets.xcassets */,
 				68313E7E22D3FBE10093236A /* LaunchScreen.storyboard */,
@@ -454,7 +449,6 @@
 				68313EAD22D410EF0093236A /* RegisterViewController.m in Sources */,
 				681A2C4F22D6A63D00BC63E4 /* DetailsViewController.m in Sources */,
 				68313EAA22D409690093236A /* LoginViewController.m in Sources */,
-				68313E7822D3FBE00093236A /* ViewController.m in Sources */,
 				68313E8322D3FBE10093236A /* main.m in Sources */,
 				681A2BFC22D53B8900BC63E4 /* ComposeViewController.m in Sources */,
 				681A2C0522D55E5200BC63E4 /* PostCell.m in Sources */,

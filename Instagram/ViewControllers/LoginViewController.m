@@ -29,6 +29,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)dismissKeyboard:(id)sender {
+    [self.view endEditing:YES];
+}
 
 - (IBAction)loginUser:(id)sender {
     NSString *username = self.usernameField.text;

@@ -43,7 +43,7 @@
     PFFileObject *img = post.image;
     [img getDataInBackgroundWithBlock:^(NSData *  imageData, NSError * error) {
         UIImage *imageToLoad = [UIImage imageWithData:imageData];
-        [self resizeImage:imageToLoad withSize:CGSizeMake(50, 50)];
+        [self resizeImage:imageToLoad withSize:CGSizeMake(400, 400)];
         [self.postImageView setImage:imageToLoad];
     }];
 }
