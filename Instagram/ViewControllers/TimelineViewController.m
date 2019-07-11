@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "TimelineViewController.h"
+#import "DetailsViewController.h"
 #import "Parse/Parse.h"
 #import "PostCell.h"
 
@@ -47,8 +48,19 @@
      //Get the new view controller using [segue destinationViewController].
      //Pass the selected object to the new view controller.
     UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.passedImage = self.photoImage;
+    if([segue.identifier isEqualToString:@"toDetails"]){
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.posts[indexPath.row];
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        DetailsViewController *detailsController = [segue destinationViewController];
+        detailsController.post = post;
+    }
+    else if ([segue.identifier isEqualToString:@"toPost"]){
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.passedImage = self.photoImage;
+    }
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -89,6 +101,7 @@
     postQuery.limit = 20;
     
     // fetch data asynchronously
+    //This is so the app does not stall while you are fetching the data from Parse
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             // do something with the data fetched
