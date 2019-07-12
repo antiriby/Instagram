@@ -54,4 +54,6 @@
     }];
 }
 
+- (IBAction)didTapLIke:(id)sender {
+}
 @end

@@ -74,12 +74,15 @@
     }];
 }
 
+- (IBAction)didTapLIke:(id)sender {
+}
+
 -(void)fetchPosts{
     // construct PFQuery
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    //postQuery.limit = 20;
+    postQuery.limit = 10;
     
     // fetch data asynchronously
     //This is so the app does not stall while you are fetching the data from Parse
@@ -115,20 +118,19 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    postQuery.skip = [self.posts count];
-    postQuery.limit = 20;
+    postQuery.skip = self.posts.count;
+    postQuery.limit = 10;
     
     // fetch data asynchronously
     //This is so the app does not stall while you are fetching the data from Parse
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             // do something with the data fetched
+             self.isMoreDataLoading = false;
             NSLog(@"Successfully pulled posts!");
             [self.posts addObjectsFromArray:posts];
             [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
-            
-            self.isMoreDataLoading = false;
+            //[self.refreshControl endRefreshing];
         }
         else {
             // handle error
