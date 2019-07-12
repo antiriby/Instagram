@@ -26,7 +26,6 @@
     self.captionLabel.text = self.post[@"caption"];
     
     NSDate *createdAtDate= self.post.createdAt;
-    // Convert Date to String
     self.timestampLabel.text = [createdAtDate timeAgoSinceNow];
 
     PFFileObject *img = self.post.image;

@@ -6,16 +6,15 @@
 //  Copyright © 2019 antiriby. All rights reserved.
 //
 
+#import "PostCell.h"
+#import "Parse/Parse.h"
+#import "AppDelegate.h"
 #import "ComposeViewController.h"
 #import "LoginViewController.h"
-#import "AppDelegate.h"
 #import "TimelineViewController.h"
 #import "DetailsViewController.h"
-#import "Parse/Parse.h"
-#import "PostCell.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource,
-  UINavigationControllerDelegate, UIScrollViewDelegate>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIScrollViewDelegate>
 
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic)UIRefreshControl *refreshControl;
@@ -43,7 +42,7 @@
     [self fetchPosts];
 }
 
-//#pragma mark - Navigation
+#pragma mark - Navigation
 
  //In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -60,6 +59,7 @@
     }
 }
 
+#pragma mark - IBAction
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
@@ -77,6 +77,7 @@
 - (IBAction)didTapLIke:(id)sender {
 }
 
+#pragma mark - Parse requests
 -(void)fetchPosts{
     // construct PFQuery
     PFQuery *postQuery = [Post query];
@@ -99,19 +100,6 @@
             NSLog(@"Error: %@", error.description);
         }
     }];
-}
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
-    Post *post = self.posts[indexPath.row];
-    cell.post = post;
-    
-
-    return cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.posts.count;
 }
 
 -(void)loadMoreData{
@@ -151,6 +139,19 @@
             [self loadMoreData];
         }
     }
+}
+
+#pragma mark - UITableViewDataSource
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    Post *post = self.posts[indexPath.row];
+    cell.post = post;
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.posts.count;
 }
 
 @end

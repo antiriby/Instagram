@@ -6,8 +6,8 @@
 //  Copyright © 2019 antiriby. All rights reserved.
 //
 
-#import "PostCell.h"
 #import "Post.h"
+#import "PostCell.h"
 #import "DateTools.h"
 
 @implementation PostCell
@@ -22,6 +22,7 @@
     // Configure the view for the selected state
 }
 
+#pragma mark - setPost
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -53,6 +54,8 @@
         [self.postImageView setImage:imageToLoad];
     }];
 }
+
+#pragma mark - IBAction
 
 - (IBAction)didTapLIke:(id)sender {
 }

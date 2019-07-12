@@ -21,6 +21,8 @@
     // Do any additional setup after loading the view.
 }
 
+#pragma mark - IBAction
+
 - (IBAction)registerUser:(id)sender {
     // initialize a user object
     PFUser *newUser = [PFUser user];

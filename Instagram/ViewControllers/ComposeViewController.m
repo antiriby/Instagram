@@ -6,8 +6,10 @@
 //  Copyright © 2019 antiriby. All rights reserved.
 //
 
-#import "ComposeViewController.h"
 #import "Post.h"
+#import "ComposeViewController.h"
+#import "TimelineViewController.h"
+
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate>
 
@@ -30,18 +32,21 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+ */
+
+#pragma mark - IBAction
 - (IBAction)dismissKeyboard:(id)sender {
     [self.view endEditing:YES];
 }
 
 - (IBAction)didTapShare:(id)sender {
     
-    Post *newPost = [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
-    UIViewController *homeFeedController =[self.tabBarController.viewControllers objectAtIndex:0];
+    [Post postUserImage:self.photoImage.image withCaption:self.captionField.text withCompletion:nil];
+    TimelineViewController *homeFeedController =[self.tabBarController.viewControllers objectAtIndex:0];
     [self.tabBarController setSelectedViewController:homeFeedController];
 }
 
+#pragma mark - IBAction
 - (IBAction)didTapImageView:(id)sender {
     
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
@@ -49,8 +54,7 @@
     imagePickerVC.allowsEditing = YES;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
+    } else {
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
@@ -58,6 +62,7 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+#pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController
