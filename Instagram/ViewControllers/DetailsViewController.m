@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 
 @end
 
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.usernameLabel.text = [NSString stringWithFormat:@"User: %@",self.post[@"author"][@"username"]];
+    //self.likesLabel.text = [self.post[@"likeCount"] intValue];
     self.captionLabel.text = self.post[@"caption"];
     
     NSDate *createdAtDate= self.post.createdAt;

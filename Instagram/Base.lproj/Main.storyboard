@@ -492,6 +492,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tn3-CC-EmO">
+                                <rect key="frame" x="190" y="331" width="195" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Rca-xK-QeA"/>
@@ -499,6 +506,7 @@
                     <navigationItem key="navigationItem" title="Details" id="sup-Sf-7Ao"/>
                     <connections>
                         <outlet property="captionLabel" destination="Gxm-qV-WKv" id="R3v-NJ-bar"/>
+                        <outlet property="likesLabel" destination="tn3-CC-EmO" id="ayV-94-w28"/>
                         <outlet property="postImageView" destination="MC6-jh-pTb" id="kvi-Me-Cto"/>
                         <outlet property="timestampLabel" destination="4uQ-Ik-7ue" id="dWs-Ve-kba"/>
                         <outlet property="usernameLabel" destination="L5j-Tu-j8Q" id="f6e-yR-j6R"/>

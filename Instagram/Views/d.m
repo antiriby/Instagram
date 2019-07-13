@@ -47,6 +47,9 @@
     // Convert Date to String
     self.timestampLabel.text = [createdAtDate timeAgoSinceNow];
     
+    self.likeButton.selected =[[self.post peopleLiked] containsObject:self.topUsernameLabel.text];
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@", self.post.likeCount]forState:UIControlStateNormal];
+    
     PFFileObject *img = post.image;
     [img getDataInBackgroundWithBlock:^(NSData *  imageData, NSError * error) {
         UIImage *imageToLoad = [UIImage imageWithData:imageData];
@@ -58,5 +61,33 @@
 #pragma mark - IBAction
 
 - (IBAction)didTapLIke:(id)sender {
+    NSString *username = self.post[@"author"][@"username"];
+    if([self.post.peopleLiked containsObject:username]) {
+        
+    } else {
+        //Increment number of likes
+        int currentLikes = [[self.post likeCount] intValue];
+        self.post.likeCount = [NSNumber numberWithInt:currentLikes + 1];
+        currentLikes = [[self.post likeCount] intValue];
+        
+        //Add user to the array
+        NSMutableArray *currentPeopleLiked = [[NSMutableArray alloc] init];
+        [currentPeopleLiked addObjectsFromArray:[self.post peopleLiked]];
+        [currentPeopleLiked addObject:username];
+        self.post.peopleLiked = currentPeopleLiked;
+        
+        [self.post saveInBackgroundWithBlock:^(BOOL saved, NSError * _Nullable error){
+            if(!error){
+                NSLog(@"Successfully liked post");
+                [self.likeButton setImage:[UIImage imageNamed:@"insta-like-icon-redd"] forState:UIControlStateNormal];
+            } else {
+                NSLog(@"Error");
+            }
+        }];
+    }
+    
+    // TODO: Update cell UI
+    [self.likeButton setTitle:[NSString stringWithFormat:@"%@", self.post.likeCount]forState:UIControlStateNormal];
+    
 }
 @end
