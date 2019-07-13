@@ -16,6 +16,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.loggedInUser = [PFUser currentUser];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,7 +50,7 @@
     // Convert Date to String
     self.timestampLabel.text = [createdAtDate timeAgoSinceNow];
     
-    self.likeButton.selected =[[self.post peopleLiked] containsObject:self.topUsernameLabel.text];
+    self.likeButton.selected =[[self.post peopleLiked] containsObject:self.loggedInUser[@"username"]];
     [self.likeButton setTitle:[NSString stringWithFormat:@"%@", self.post.likeCount]forState:UIControlStateNormal];
     
     PFFileObject *img = post.image;
@@ -62,7 +64,7 @@
 #pragma mark - IBAction
 
 - (IBAction)didTapLIke:(id)sender {
-    NSString *username = self.post[@"author"][@"username"];
+    NSString *username = self.loggedInUser[@"username"];
     if([self.post.peopleLiked containsObject:username]) {
         //Decrement number of likes
         int currentLikes = [[self.post likeCount] intValue];
@@ -78,8 +80,10 @@
         //Save to Parse and update cell UI
         [self.post saveInBackgroundWithBlock:^(BOOL saved, NSError * _Nullable error){
             if(!error){
-                NSLog(@"Successfully unliked post");
                 [self.likeButton setImage:[UIImage imageNamed:@"insta-like-icon"] forState:UIControlStateNormal];
+                [self.likeButton setTitle:[NSString stringWithFormat:@"%@", self.post.likeCount]forState:UIControlStateNormal];
+                [self.delegate updateUI];
+                NSLog(@"Successfully unliked post");
             } else {
                 NSLog(@"Error: %@", error.localizedDescription);
             }
@@ -99,8 +103,11 @@
         
         [self.post saveInBackgroundWithBlock:^(BOOL saved, NSError * _Nullable error){
             if(!error){
-                NSLog(@"Successfully liked post");
+                
                 [self.likeButton setImage:[UIImage imageNamed:@"insta-like-icon-redd"] forState:UIControlStateNormal];
+                [self.likeButton setTitle:[NSString stringWithFormat:@"%@", self.post.likeCount]forState:UIControlStateNormal];
+                [self.delegate updateUI];
+                NSLog(@"Successfully liked post");
             } else {
                 NSLog(@"Error");
             }

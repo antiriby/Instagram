@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIImage *photoImage;
 @property (strong, nonatomic) NSMutableArray *posts;
 - (IBAction)didTapLogout:(id)sender;
-- (IBAction)didTapLIke:(id)sender;
 
 @end
 

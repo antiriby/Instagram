@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.usernameLabel.text = [NSString stringWithFormat:@"User: %@",self.post[@"author"][@"username"]];
-    //self.likesLabel.text = [self.post[@"likeCount"] intValue];
+    self.likesLabel.text = [NSString stringWithFormat:@"Number of likes: %@", self.post.likeCount];
     self.captionLabel.text = self.post[@"caption"];
     
     NSDate *createdAtDate= self.post.createdAt;

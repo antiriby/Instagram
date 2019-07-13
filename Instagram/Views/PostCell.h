@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) PFUser *loggedInUser;
 @property (weak, nonatomic) id<PostCellDelegate> delegate;
 
 - (IBAction)didTapLIke:(id)sender;
