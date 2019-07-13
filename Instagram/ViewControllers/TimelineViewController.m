@@ -14,7 +14,7 @@
 #import "TimelineViewController.h"
 #import "DetailsViewController.h"
 
-@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIScrollViewDelegate>
+@interface TimelineViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIScrollViewDelegate, PostCellDelegate>
 
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic)UIRefreshControl *refreshControl;
@@ -146,12 +146,18 @@
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
     Post *post = self.posts[indexPath.row];
     cell.post = post;
-    
+    cell.delegate = self;
+        
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
 }
+
+- (void)updateUI {
+    [self fetchPosts];
+}
+
 
 @end

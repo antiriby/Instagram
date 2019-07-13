@@ -10,6 +10,7 @@
 #import "PostCell.h"
 #import "DateTools.h"
 
+
 @implementation PostCell
 
 - (void)awakeFromNib {
@@ -63,6 +64,26 @@
 - (IBAction)didTapLIke:(id)sender {
     NSString *username = self.post[@"author"][@"username"];
     if([self.post.peopleLiked containsObject:username]) {
+        //Decrement number of likes
+        int currentLikes = [[self.post likeCount] intValue];
+        self.post.likeCount = [NSNumber numberWithInt:currentLikes - 1];
+        currentLikes = [[self.post likeCount] intValue];
+        
+        //Remove username from array
+        NSMutableArray *currentPeopleLiked = [[NSMutableArray alloc] init];
+        [currentPeopleLiked addObjectsFromArray:[self.post peopleLiked]];
+        [currentPeopleLiked removeObject:username];
+        self.post.peopleLiked = currentPeopleLiked;
+        
+        //Save to Parse and update cell UI
+        [self.post saveInBackgroundWithBlock:^(BOOL saved, NSError * _Nullable error){
+            if(!error){
+                NSLog(@"Successfully unliked post");
+                [self.likeButton setImage:[UIImage imageNamed:@"insta-like-icon"] forState:UIControlStateNormal];
+            } else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
         
     } else {
         //Increment number of likes
@@ -88,6 +109,7 @@
     
     // TODO: Update cell UI
     [self.likeButton setTitle:[NSString stringWithFormat:@"%@", self.post.likeCount]forState:UIControlStateNormal];
+    [self.delegate updateUI];
     
 }
 @end

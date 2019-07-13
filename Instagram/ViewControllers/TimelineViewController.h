@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIImage *photoImage;
 @property (strong, nonatomic) NSMutableArray *posts;
-@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 - (IBAction)didTapLogout:(id)sender;
 - (IBAction)didTapLIke:(id)sender;
 

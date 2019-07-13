@@ -235,8 +235,8 @@
                                                         <constraint firstAttribute="width" constant="43" id="MYj-O9-e92"/>
                                                         <constraint firstAttribute="height" constant="40" id="kYL-Se-IT0"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="intsta-like-icon"/>
-                                                    <state key="selected" title="0" image="insta-like-icon-redd">
+                                                    <state key="normal" title="Button" image="insta-like-icon"/>
+                                                    <state key="selected" title="0" image="insta-like-icon-red">
                                                         <color key="titleColor" red="1" green="0.19844910860000001" blue="0.24546021609999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
                                                     <connections>
@@ -600,10 +600,10 @@
         <image name="insta logo-1" width="225" height="225"/>
         <image name="insta-bookmark-icon-1" width="280" height="280"/>
         <image name="insta-comment-icon" width="200" height="200"/>
-        <image name="insta-like-icon-redd" width="169" height="169"/>
+        <image name="insta-like-icon" width="357.5" height="357.5"/>
+        <image name="insta-like-icon-red" width="84.5" height="84.5"/>
         <image name="insta-share-icon" width="512" height="512"/>
         <image name="insta_camera_btn" width="25" height="25"/>
-        <image name="intsta-like-icon" width="357.5" height="357.5"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

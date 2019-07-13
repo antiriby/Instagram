@@ -11,6 +11,11 @@
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol PostCellDelegate
+
+-(void)updateUI;
+
+@end
 
 @interface PostCell : UITableViewCell
 
@@ -21,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Post *post;
+@property (weak, nonatomic) id<PostCellDelegate> delegate;
+
 - (IBAction)didTapLIke:(id)sender;
 
 @end
